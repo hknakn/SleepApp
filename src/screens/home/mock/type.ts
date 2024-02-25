@@ -1,4 +1,4 @@
-type SleepStage = {
+export type SleepStage = {
   stage: "awake" | "out" | "light" | "deep";
   duration: number;
 };
@@ -12,7 +12,7 @@ type TimeSeriesData = {
   heating: Array<[string, number]>;
 };
 
-type SleepSession = {
+export type SleepSession = {
   id: string;
   ts: string;
   stages: SleepStage[];

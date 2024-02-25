@@ -1,11 +1,14 @@
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 
 type Style = {
   container: ViewStyle;
-  titleTextStyle: TextStyle;
-  buttonStyle: ViewStyle;
-  buttonTextStyle: TextStyle;
+  header: ViewStyle;
+  flatlist: ViewStyle;
+  dateContainer: ViewStyle;
+  dateTextContainer: ViewStyle;
+  flatlistContentContainer: ViewStyle;
+  scrollviewContentContainer: ViewStyle;
 };
 
 export default (theme: ExtendedTheme) => {
@@ -13,31 +16,34 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
+    },
+    header: {
+      width: "100%",
+      justifyContent: "space-between",
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 16,
+      paddingBottom: 12,
+      borderBottomColor: colors.foreground,
+      borderBottomWidth: 2,
+    },
+    flatlist: {
+      paddingHorizontal: 16,
+      marginVertical: 16,
+      flexGrow: 0,
+    },
+    flatlistContentContainer: {
+      height: 100,
+    },
+    dateContainer: {
       alignItems: "center",
       justifyContent: "center",
     },
-    titleTextStyle: {
-      fontSize: 32,
+    dateTextContainer: {
+      marginTop: 8,
     },
-    buttonStyle: {
-      height: 45,
-      width: "90%",
-      marginTop: 32,
-      borderRadius: 12,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: colors.primary,
-      shadowRadius: 5,
-      shadowOpacity: 0.7,
-      shadowColor: colors.primary,
-      shadowOffset: {
-        width: 0,
-        height: 3,
-      },
-    },
-    buttonTextStyle: {
-      color: colors.text,
-      fontWeight: "700",
+    scrollviewContentContainer: {
+      paddingBottom: 32,
     },
   });
 };

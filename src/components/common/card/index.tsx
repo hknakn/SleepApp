@@ -1,22 +1,22 @@
 import React, { useMemo } from "react";
 import {
+  TouchableOpacity,
   View,
   useColorScheme,
   type StyleProp,
   type ViewStyle,
 } from "react-native";
 import createStyles from "./style";
-import RNBounceable from "@freakycoder/react-native-bounceable";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "elements";
-import { MockData } from "@screens/home/mock/MockData";
+import { UserData } from "@screens/home/mock/MockData";
 import CircularProgress from "react-native-circular-progress-indicator";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
 type CardItemProps = {
   style?: CustomStyleProp;
-  data: MockData;
+  data: UserData;
   onPress: () => void;
 };
 
@@ -64,7 +64,7 @@ export const CardItem = ({ style, data, onPress }: CardItemProps) => {
   }, [intervals]);
 
   return (
-    <RNBounceable style={[styles.container, style]} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <View style={styles.contentContainer}>
         <Text style={styles.title} bold color={"#0073DD"}>
           {fullName}
@@ -96,6 +96,6 @@ export const CardItem = ({ style, data, onPress }: CardItemProps) => {
           return `${Math.round(value)}%`;
         }}
       />
-    </RNBounceable>
+    </TouchableOpacity>
   );
 };
