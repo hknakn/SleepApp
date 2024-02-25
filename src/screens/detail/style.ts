@@ -1,12 +1,12 @@
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 
-interface Style {
+type Style = {
   container: ViewStyle;
   titleTextStyle: TextStyle;
   buttonStyle: ViewStyle;
   buttonTextStyle: TextStyle;
-}
+};
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;

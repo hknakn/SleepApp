@@ -2,12 +2,12 @@ import { StyleSheet, ViewStyle } from "react-native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { ExtendedTheme } from "@react-navigation/native";
 
-interface Style {
+type Style = {
   container: ViewStyle;
   header: ViewStyle;
   profileImageContainer: ViewStyle;
   listContainer: ViewStyle;
-}
+};
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;

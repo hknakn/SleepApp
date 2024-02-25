@@ -9,9 +9,7 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "elements";
 
-interface DetailScreenProps {}
-
-export const DetailScreen = ({}: DetailScreenProps) => {
+export const DetailScreen = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);

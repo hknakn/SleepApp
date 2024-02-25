@@ -78,9 +78,7 @@ const Navigation = () => {
     >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={SCREENS.HOME} component={renderTabNavigation} />
-        <Stack.Screen name={SCREENS.DETAIL}>
-          {(props) => <DetailScreen {...props} />}
-        </Stack.Screen>
+        <Stack.Screen name={SCREENS.DETAIL} component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

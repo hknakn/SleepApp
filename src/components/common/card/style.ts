@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import type { ExtendedTheme } from "@react-navigation/native";
 
-interface Style {
+type Style = {
   container: ViewStyle;
   descriptionTextStyle: TextStyle;
   contentContainer: ViewStyle;
-}
+};
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
