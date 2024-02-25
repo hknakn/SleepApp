@@ -8,7 +8,7 @@ export const palette = {
   eerieBlack: "#151515",
   gray94: "#F0F0F0",
   deepSkyBlue: "#246AFF",
-  lightBlue: "#ADD8E6",
+  cinnabar: "#E54E41",
 };
 
 export const LightTheme: ExtendedTheme = {
@@ -18,7 +18,8 @@ export const LightTheme: ExtendedTheme = {
     background: palette.white,
     text: palette.black,
     foreground: palette.gray94,
-    blue: palette.lightBlue,
+    blue: palette.deepSkyBlue,
+    red: palette.cinnabar,
   },
 };
 
@@ -30,5 +31,6 @@ export const DarkTheme: ExtendedTheme = {
     text: palette.white,
     foreground: palette.eerieBlack,
     blue: palette.deepSkyBlue,
+    red: palette.cinnabar,
   },
 };

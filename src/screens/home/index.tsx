@@ -3,11 +3,12 @@ import { FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationService from "react-navigation-helpers";
 import createStyles from "./style";
-import MockData from "./mock/MockData";
+
 import { useTheme } from "@react-navigation/native";
 import { SCREENS } from "@shared-constants";
 import { CardItem } from "components";
 import { Text } from "elements";
+import { MockData } from "./mock/MockData";
 
 export const HomeScreen = () => {
   const theme = useTheme();

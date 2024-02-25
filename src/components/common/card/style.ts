@@ -5,8 +5,10 @@ import type { ExtendedTheme } from "@react-navigation/native";
 
 type Style = {
   container: ViewStyle;
-  descriptionTextStyle: TextStyle;
   contentContainer: ViewStyle;
+  title: TextStyle;
+  descriptionBold: TextStyle;
+  description: TextStyle;
 };
 
 export default (theme: ExtendedTheme) => {
@@ -18,14 +20,21 @@ export default (theme: ExtendedTheme) => {
       borderRadius: 10,
       width: ScreenWidth * 0.9,
       backgroundColor: colors.foreground,
+      flexDirection: "row",
+      justifyContent: "space-between",
     },
-    descriptionTextStyle: {
+    title: {
+      fontSize: 24,
+    },
+    description: {
+      fontSize: 16,
       marginTop: 8,
     },
+    descriptionBold: {
+      fontSize: 16,
+    },
     contentContainer: {
-      marginTop: 16,
-      flexDirection: "row",
-      alignItems: "center",
+      justifyContent: "space-between",
     },
   });
 };

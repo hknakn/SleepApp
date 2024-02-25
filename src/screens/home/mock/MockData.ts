@@ -1,6 +1,13 @@
-export default [
+import SleepData from "./type";
+
+export type MockData = {
+  fullName: string;
+  sleepData: SleepData;
+};
+
+export const MockData: MockData[] = [
   {
-    name: "Hakan Akin",
+    fullName: "Hakan Akin",
     sleepData: {
       intervals: [
         {
@@ -326,7 +333,7 @@ export default [
     },
   },
   {
-    name: "Aslihan Akalin",
+    fullName: "Aslihan Akalin",
     sleepData: {
       intervals: [
         {
@@ -648,7 +655,7 @@ export default [
     },
   },
   {
-    name: "Nihat Akin",
+    fullName: "Nihat Akin",
     sleepData: {
       intervals: [
         {
