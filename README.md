@@ -1,9 +1,8 @@
 # Eight Sleep App
 
 ### Preview
-<div align="center">
-  <video src="preview.mp4" width="400" />
-</div>
+
+https://github.com/hknakn/SleepApp/assets/23198534/11941d6f-3723-41a4-b595-a064b0733ada
 
 ### Tech Stack
 
