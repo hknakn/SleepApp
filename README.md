@@ -1,7 +1,9 @@
 # Eight Sleep App
 
 ### Preview
-<video src="preview.mp4" width="300" />
+<div align="center">
+  <video src="myvideo.mp4" width="400" />
+</div>
 
 ### Tech Stack
 
