@@ -18,8 +18,10 @@ const Navigation = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
 
-  useEffect((): any => {
-    return () => (isReadyRef.current = false);
+  useEffect(() => {
+    return () => {
+      isReadyRef.current = false;
+    };
   }, []);
 
   return (

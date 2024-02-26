@@ -1,5 +1,4 @@
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { ExtendedTheme } from "@react-navigation/native";
 
 type Style = {
   container: ViewStyle;
@@ -7,8 +6,7 @@ type Style = {
   chartContainer: ViewStyle;
 };
 
-export default (theme: ExtendedTheme) => {
-  const { colors } = theme;
+export default () => {
   return StyleSheet.create<Style>({
     container: {
       paddingHorizontal: 16,
