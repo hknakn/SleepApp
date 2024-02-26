@@ -15,12 +15,12 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       paddingHorizontal: 16,
-      marginVertical: 32,
+      marginBottom: 32,
     },
     legendContainer: {
       flexDirection: "row",
       alignItems: "center",
-      marginVertical: 16,
+      marginBottom: 16,
     },
     redDot: {
       width: 16,

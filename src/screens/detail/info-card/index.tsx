@@ -18,10 +18,10 @@ const InfoCard = ({ title, value, average, style }: InfoCardProps) => {
 
   return (
     <View style={[styles.container, style]}>
-      <Text h4 bold color={colors.text} style={{ marginBottom: 8 }}>
+      <Text h4 bold color={colors.text} style={styles.textContainer}>
         {title}
       </Text>
-      <Text h5 color={colors.text} style={{ marginBottom: 8 }}>
+      <Text h5 color={colors.text} style={styles.textContainer}>
         {value}
       </Text>
       {average && (

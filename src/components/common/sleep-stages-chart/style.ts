@@ -15,7 +15,7 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       paddingHorizontal: 16,
-      marginVertical: 32,
+      marginBottom: 32,
     },
     legendContainer: {
       flexDirection: "row",
@@ -43,7 +43,6 @@ export default (theme: ExtendedTheme) => {
     chartContainer: {
       width: "100%",
       height: 300,
-      marginTop: 16,
     },
   });
 };

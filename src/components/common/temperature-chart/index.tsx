@@ -19,7 +19,7 @@ export const TemperatureChart = ({ interval }: TemperatureChartProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const font = useFont(MontserratRegular, 12);
 
-  // Creating data for the chart with tempBedC and tempRoomC together
+  // Preparing data for the chart with tempBedC and tempRoomC together
   const data = interval.timeseries.tempBedC.map(([x, y]) => {
     return {
       time: moment.utc(x, "YYYY-MM-DDTHH:mm:ss Z").format("Ha"),
@@ -32,14 +32,9 @@ export const TemperatureChart = ({ interval }: TemperatureChartProps) => {
 
   return (
     <View style={styles.container}>
-      <Text h3 bold color={colors.text}>
-        Bed and Room Temperature
-      </Text>
-
       <View style={styles.legendContainer}>
         <View style={styles.redDot} />
         <Text style={styles.legendText}>Bed</Text>
-
         <View style={styles.blueDot} />
         <Text style={styles.legendText}>Room</Text>
       </View>

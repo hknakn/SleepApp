@@ -1,20 +1,11 @@
 import React, { useCallback, useMemo, useState } from "react";
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  useColorScheme,
-} from "react-native";
+import { ScrollView, View } from "react-native";
 import createStyles from "./style";
 import { useRoute, useTheme } from "@react-navigation/native";
 import { UserData } from "@screens/home/mock/MockData";
 import moment from "moment";
-import CircularProgress from "react-native-circular-progress-indicator";
-import { Text } from "elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
-import Icon, { IconType } from "react-native-dynamic-vector-icons";
-import * as NavigationService from "react-navigation-helpers";
 import {
   HeartRateChart,
   RespiratoryRateChart,
@@ -22,171 +13,105 @@ import {
   TemperatureChart,
 } from "components";
 import { SleepSession } from "@screens/home/mock/type";
-import { InfoCard } from "./info-card";
-import {
-  calculateAverageBedTemperature,
-  calculateAverageHeartRate,
-  calculateAverageRespiratoryRate,
-  calculateAverageSleepScore,
-  calculateAverageTimeToSleep,
-  calculateAverageTossAndTurns,
-  calculateBedTemperature,
-  calculateHeartRate,
-  calculateRespiratoryRate,
-  calculateTimeToSleep,
-  calculateTossAndTurns,
-} from "utils";
+import { Header } from "./header";
+import { DaySleepScore } from "./day-sleep-score";
+import { InfoCards } from "./info-cards";
+import { Text } from "elements";
+
+const CHARTS = [
+  {
+    title: "Temperature",
+    component: TemperatureChart,
+  },
+  {
+    title: "Sleep Stages",
+    component: SleepStagesChart,
+  },
+  {
+    title: "Heart Rate",
+    component: HeartRateChart,
+  },
+  {
+    title: "Respiratory Rate",
+    component: RespiratoryRateChart,
+  },
+];
 
 export const DetailScreen = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const mockData: UserData = useRoute().params?.data;
-  const scheme = useColorScheme();
-  const isDarkMode = scheme === "dark";
   // Sorting the sleep data by date. Earlier dates come first
   const orderedIntervals = mockData.sleepData.intervals.sort((a, b) => {
     return moment(a.ts).diff(moment(b.ts));
   });
-  console.log("orderedIntervals", orderedIntervals);
-
   const [selectedInterval, setSelectedInterval] = useState(orderedIntervals[0]);
 
   const onDatePress = useCallback((interval: SleepSession) => {
     setSelectedInterval(interval);
   }, []);
 
-  const onBackPress = () => {
-    // Go back to the previous screen
-    NavigationService.goBack();
-  };
-
-  const renderHeader = () => {
-    return (
-      <View style={styles.header}>
-        <TouchableOpacity hitSlop={10} onPress={onBackPress}>
-          <Icon
-            name="chevron-back-outline"
-            type={IconType.Ionicons}
-            size={24}
-            color={colors.text}
-          />
-        </TouchableOpacity>
-        <Text h4 bold color={colors.text}>
-          {mockData.fullName}
-        </Text>
-        <View style={{ width: "6%" }} />
-      </View>
-    );
-  };
-
-  const renderItem = useCallback(
+  const renderDaySleepScore = useCallback(
     ({ item }: { item: SleepSession }) => (
-      <TouchableOpacity
-        style={[
-          { opacity: selectedInterval === item ? 1 : 0.5 },
-          styles.dateContainer,
-        ]}
-        onPress={() => onDatePress(item)}
-      >
-        <CircularProgress
-          value={item.score || 0}
-          radius={30}
-          inActiveStrokeColor={isDarkMode ? "#143F99" : "#0073DD"}
-          activeStrokeColor={isDarkMode ? "#0073DD" : "#143F99"}
-          progressValueColor={colors.text}
-          progressFormatter={(value: number) => {
-            "worklet";
-            return `${Math.round(value)}%`;
-          }}
-        />
-        <View style={styles.dateTextContainer}>
-          <Text color={colors.text}>{moment(item.ts).format("MMM D")}</Text>
-        </View>
-      </TouchableOpacity>
+      <DaySleepScore
+        item={item}
+        isSelected={selectedInterval === item}
+        onDatePress={onDatePress}
+      />
     ),
-    [
-      selectedInterval,
-      isDarkMode,
-      colors.text,
-      styles.dateContainer,
-      styles.dateTextContainer,
-      onDatePress,
-    ],
+    [onDatePress, selectedInterval],
   );
 
-  const ItemSeparatorComponent = () => <View style={styles.separator} />;
-  const ChartSeperator = () => <View style={styles.chartSeparator} />;
+  const renderCharts = useCallback(
+    ({ item }: { item: (typeof CHARTS)[0] }) => (
+      <>
+        <View style={styles.chartTitleContainer}>
+          <Text h3 bold color={colors.text}>
+            {item.title}
+          </Text>
+        </View>
+        <item.component interval={selectedInterval} />
+      </>
+    ),
+    [selectedInterval, colors.text, styles.chartTitleContainer],
+  );
+
+  const DaySleepScoreSeparator = () => (
+    <View style={styles.daySleepSeparator} />
+  );
+
+  const ChartSeparator = () => <View style={styles.chartSeparator} />;
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Displaying a circular progress for each day */}
-      {renderHeader()}
+      <Header fullName={mockData.fullName} />
+
       <ScrollView contentContainerStyle={styles.scrollviewContentContainer}>
+        {/* Rendering Day Sleep Scores */}
         <FlatList
           style={styles.flatlist}
           contentContainerStyle={styles.flatlistContentContainer}
           data={orderedIntervals}
           horizontal
-          ItemSeparatorComponent={ItemSeparatorComponent}
+          ItemSeparatorComponent={DaySleepScoreSeparator}
           showsHorizontalScrollIndicator={false}
-          renderItem={renderItem}
+          renderItem={renderDaySleepScore}
         />
-        <View style={styles.cardsContainer}>
-          <InfoCard
-            style={styles.infoCard}
-            title="Time to fall asleep"
-            value={calculateTimeToSleep(selectedInterval.stages)}
-            average={calculateAverageTimeToSleep(orderedIntervals)}
-          />
-          <InfoCard
-            style={styles.infoCard}
-            title="Sleep score"
-            value={`${selectedInterval.score.toString()}%`}
-            average={`${calculateAverageSleepScore(orderedIntervals).toString()}%`}
-          />
-        </View>
-        <View style={styles.cardsContainer}>
-          <InfoCard
-            style={styles.infoCard}
-            title="Heart rate"
-            value={calculateHeartRate(selectedInterval).toString()}
-            average={calculateAverageHeartRate(orderedIntervals).toString()}
-          />
-          <InfoCard
-            style={styles.infoCard}
-            title="Respiratory rate"
-            value={calculateRespiratoryRate(selectedInterval).toString()}
-            average={calculateAverageRespiratoryRate(
-              orderedIntervals,
-            ).toString()}
-          />
-        </View>
 
-        <View style={styles.cardsContainer}>
-          <InfoCard
-            style={styles.infoCard}
-            title="Toss and turns"
-            value={calculateTossAndTurns(selectedInterval).toString()}
-            average={calculateAverageTossAndTurns(orderedIntervals).toString()}
-          />
-          <InfoCard
-            style={styles.infoCard}
-            title="Bed temperature"
-            value={calculateBedTemperature(selectedInterval).toString()}
-            average={calculateAverageBedTemperature(
-              orderedIntervals,
-            ).toString()}
-          />
-        </View>
+        {/* Rendering Info Cards */}
+        <InfoCards
+          selectedInterval={selectedInterval}
+          orderedIntervals={orderedIntervals}
+        />
 
-        <TemperatureChart interval={selectedInterval} />
-        <ChartSeperator />
-        <SleepStagesChart interval={selectedInterval} />
-        <ChartSeperator />
-        <HeartRateChart interval={selectedInterval} />
-        <ChartSeperator />
-        <RespiratoryRateChart interval={selectedInterval} />
+        {/* Rendering Charts */}
+        <FlatList
+          data={CHARTS}
+          renderItem={renderCharts}
+          keyExtractor={(item) => item.title}
+          ItemSeparatorComponent={ChartSeparator}
+        />
       </ScrollView>
     </SafeAreaView>
   );

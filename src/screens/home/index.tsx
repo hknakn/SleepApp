@@ -1,18 +1,16 @@
 import React, { useCallback, useMemo } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationService from "react-navigation-helpers";
 import createStyles from "./style";
 import { useTheme } from "@react-navigation/native";
 import { SCREENS } from "@shared-constants";
-
-import { Text } from "elements";
 import { MockData, UserData } from "./mock/MockData";
 import { PersonCard } from "./person-card";
+import { Header } from "./header";
 
 export const HomeScreen = () => {
   const theme = useTheme();
-  const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   const handleItemPress = useCallback((item: UserData) => {
@@ -28,17 +26,11 @@ export const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.profileImageContainer}>
-          <Text h4 bold color={colors.text}>
-            HA
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.listContainer}>
-        <FlatList data={MockData} renderItem={renderItem} />
-      </View>
+      <FlatList
+        data={MockData}
+        renderItem={renderItem}
+        ListHeaderComponent={<Header />}
+      />
     </SafeAreaView>
   );
 };

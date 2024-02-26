@@ -7,7 +7,6 @@ import { useFont } from "@shopify/react-native-skia";
 import MontserratRegular from "../../../assets/fonts/Montserrat/Montserrat-Regular.ttf";
 import moment from "moment";
 import { SleepSession } from "@screens/home/mock/type";
-import { Text } from "elements";
 import { hexToRGBA, numberToSleepStage, sleepStageToNumber } from "utils";
 import { SleepStagesChartData } from "./type";
 
@@ -22,11 +21,10 @@ export const SleepStagesChart = ({ interval }: SleepStagesChartProps) => {
   const font = useFont(MontserratRegular, 12);
   const sleepStagesData: SleepStagesChartData[] = [];
 
-  // Creating the data for the chart
+  // Preparing the data for the chart
   interval.stages.forEach((stage) => {
     const startOfTheStage = moment.utc(interval.ts, "YYYY-MM-DDTHH:mm:ss Z");
     startOfTheStage.add(stage.duration, "seconds");
-
     sleepStagesData.push({
       time: startOfTheStage.format("HH:mm"),
       stage: sleepStageToNumber(stage.stage),
@@ -35,10 +33,6 @@ export const SleepStagesChart = ({ interval }: SleepStagesChartProps) => {
 
   return (
     <View style={styles.container}>
-      <Text h3 bold color={colors.text}>
-        Sleep Stages
-      </Text>
-
       <View style={styles.chartContainer}>
         <CartesianChart
           data={sleepStagesData}

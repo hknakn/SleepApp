@@ -3,12 +3,7 @@ import { useColorScheme } from "react-native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-// ? Screens
 import { HomeScreen, DetailScreen } from "@screens/index";
-
-/**
- * ? Local & Shared Imports
- */
 import { SCREENS } from "@shared-constants";
 import { DarkTheme, LightTheme } from "@theme/themes";
 

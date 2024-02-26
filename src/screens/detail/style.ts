@@ -3,16 +3,12 @@ import { ExtendedTheme } from "@react-navigation/native";
 
 type Style = {
   container: ViewStyle;
-  header: ViewStyle;
   flatlist: ViewStyle;
-  dateContainer: ViewStyle;
-  dateTextContainer: ViewStyle;
   flatlistContentContainer: ViewStyle;
   scrollviewContentContainer: ViewStyle;
-  separator: ViewStyle;
-  cardsContainer: ViewStyle;
-  infoCard: ViewStyle;
+  daySleepSeparator: ViewStyle;
   chartSeparator: ViewStyle;
+  chartTitleContainer: ViewStyle;
 };
 
 export default (theme: ExtendedTheme) => {
@@ -20,16 +16,6 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-    },
-    header: {
-      width: "100%",
-      justifyContent: "space-between",
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 16,
-      paddingBottom: 12,
-      borderBottomColor: colors.foreground,
-      borderBottomWidth: 2,
     },
     flatlist: {
       marginVertical: 16,
@@ -39,32 +25,20 @@ export default (theme: ExtendedTheme) => {
       height: 100,
       paddingHorizontal: 16,
     },
-    dateContainer: {
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    dateTextContainer: {
-      marginTop: 8,
-    },
     scrollviewContentContainer: {
       paddingBottom: 32,
     },
-    separator: {
+    daySleepSeparator: {
       width: 24,
-    },
-    cardsContainer: {
-      paddingHorizontal: 16,
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
-    infoCard: {
-      marginBottom: 16,
-      width: "48%",
     },
     chartSeparator: {
       marginHorizontal: 16,
       backgroundColor: colors.foreground,
       height: 1,
+    },
+    chartTitleContainer: {
+      marginVertical: 32,
+      paddingHorizontal: 16,
     },
   });
 };

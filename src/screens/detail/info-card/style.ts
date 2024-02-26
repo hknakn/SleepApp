@@ -3,6 +3,7 @@ import { ExtendedTheme } from "@react-navigation/native";
 
 type Style = {
   container: ViewStyle;
+  textContainer: ViewStyle;
 };
 
 export default (theme: ExtendedTheme) => {
@@ -13,6 +14,9 @@ export default (theme: ExtendedTheme) => {
       borderRadius: 10,
       backgroundColor: colors.foreground,
       justifyContent: "center",
+    },
+    textContainer: {
+      marginBottom: 8,
     },
   });
 };

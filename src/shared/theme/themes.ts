@@ -9,6 +9,10 @@ export const palette = {
   gray94: "#F0F0F0",
   deepSkyBlue: "#246AFF",
   cinnabar: "#E54E41",
+  bridgeport: "#004584",
+  water: "#CCE3F8",
+  celticBlue: "#0073DD",
+  dora: "#328FE3",
 };
 
 export const LightTheme: ExtendedTheme = {
@@ -20,6 +24,8 @@ export const LightTheme: ExtendedTheme = {
     foreground: palette.gray94,
     blue: palette.deepSkyBlue,
     red: palette.cinnabar,
+    inActiveStrokeColor: palette.water,
+    activeStrokeColor: palette.dora,
   },
 };
 
@@ -32,5 +38,7 @@ export const DarkTheme: ExtendedTheme = {
     foreground: palette.eerieBlack,
     blue: palette.deepSkyBlue,
     red: palette.cinnabar,
+    inActiveStrokeColor: palette.bridgeport,
+    activeStrokeColor: palette.celticBlue,
   },
 };
