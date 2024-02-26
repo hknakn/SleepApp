@@ -2,7 +2,7 @@
 
 ### Preview
 <div align="center">
-  <video src="myvideo.mp4" width="400" />
+  <video src="preview.mp4" width="400" />
 </div>
 
 ### Tech Stack
