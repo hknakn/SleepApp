@@ -1,7 +1,7 @@
 # Eight Sleep App
 
 ### Preview
-<video src="https://github.com/hknakn/SleepApp/blob/master/preview.mp4" width="300" />
+<video src="preview.mp4" width="300" />
 
 ### Tech Stack
 
