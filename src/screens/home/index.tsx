@@ -5,9 +5,10 @@ import * as NavigationService from "react-navigation-helpers";
 import createStyles from "./style";
 import { useTheme } from "@react-navigation/native";
 import { SCREENS } from "@shared-constants";
-import { CardItem } from "components";
+
 import { Text } from "elements";
 import { MockData, UserData } from "./mock/MockData";
+import { PersonCard } from "./person-card";
 
 export const HomeScreen = () => {
   const theme = useTheme();
@@ -20,7 +21,7 @@ export const HomeScreen = () => {
 
   const renderItem = useCallback(
     ({ item }: { item: UserData }) => (
-      <CardItem data={item} onPress={() => handleItemPress(item)} />
+      <PersonCard data={item} onPress={() => handleItemPress(item)} />
     ),
     [handleItemPress],
   );

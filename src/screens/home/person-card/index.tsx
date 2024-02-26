@@ -14,13 +14,13 @@ import CircularProgress from "react-native-circular-progress-indicator";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
-type CardItemProps = {
+type PersonCardProps = {
   style?: CustomStyleProp;
   data: UserData;
   onPress: () => void;
 };
 
-export const CardItem = ({ style, data, onPress }: CardItemProps) => {
+export const PersonCard = ({ style, data, onPress }: PersonCardProps) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);

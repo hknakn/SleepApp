@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
 import {
-  Pressable,
   ScrollView,
   TouchableOpacity,
   View,
@@ -16,7 +15,27 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import Icon, { IconType } from "react-native-dynamic-vector-icons";
 import * as NavigationService from "react-navigation-helpers";
-import { SleepStagesChart, TemperatureChart } from "components";
+import {
+  HeartRateChart,
+  RespiratoryRateChart,
+  SleepStagesChart,
+  TemperatureChart,
+} from "components";
+import { SleepSession } from "@screens/home/mock/type";
+import { InfoCard } from "./info-card";
+import {
+  calculateAverageBedTemperature,
+  calculateAverageHeartRate,
+  calculateAverageRespiratoryRate,
+  calculateAverageSleepScore,
+  calculateAverageTimeToSleep,
+  calculateAverageTossAndTurns,
+  calculateBedTemperature,
+  calculateHeartRate,
+  calculateRespiratoryRate,
+  calculateTimeToSleep,
+  calculateTossAndTurns,
+} from "utils";
 
 export const DetailScreen = () => {
   const theme = useTheme();
@@ -26,14 +45,15 @@ export const DetailScreen = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
   // Sorting the sleep data by date. Earlier dates come first
-  const dates = mockData.sleepData.intervals
-    .map((interval) => moment(interval.ts).format("MMM D"))
-    .reverse();
+  const orderedIntervals = mockData.sleepData.intervals.sort((a, b) => {
+    return moment(a.ts).diff(moment(b.ts));
+  });
+  console.log("orderedIntervals", orderedIntervals);
 
-  const [selectedDate, setSelectedDate] = useState(dates[0]);
+  const [selectedInterval, setSelectedInterval] = useState(orderedIntervals[0]);
 
-  const onDatePress = useCallback((date: string) => {
-    setSelectedDate(date);
+  const onDatePress = useCallback((interval: SleepSession) => {
+    setSelectedInterval(interval);
   }, []);
 
   const onBackPress = () => {
@@ -44,14 +64,14 @@ export const DetailScreen = () => {
   const renderHeader = () => {
     return (
       <View style={styles.header}>
-        <Pressable hitSlop={10} onPress={onBackPress}>
+        <TouchableOpacity hitSlop={10} onPress={onBackPress}>
           <Icon
             name="chevron-back-outline"
             type={IconType.Ionicons}
             size={24}
             color={colors.text}
           />
-        </Pressable>
+        </TouchableOpacity>
         <Text h4 bold color={colors.text}>
           {mockData.fullName}
         </Text>
@@ -61,20 +81,16 @@ export const DetailScreen = () => {
   };
 
   const renderItem = useCallback(
-    ({ item }: { item: string }) => (
+    ({ item }: { item: SleepSession }) => (
       <TouchableOpacity
         style={[
-          { opacity: selectedDate === item ? 1 : 0.5 },
+          { opacity: selectedInterval === item ? 1 : 0.5 },
           styles.dateContainer,
         ]}
         onPress={() => onDatePress(item)}
       >
         <CircularProgress
-          value={
-            mockData.sleepData.intervals.find(
-              (interval) => moment(interval.ts).format("MMM D") === item,
-            )?.score || 0
-          }
+          value={item.score || 0}
           radius={30}
           inActiveStrokeColor={isDarkMode ? "#143F99" : "#0073DD"}
           activeStrokeColor={isDarkMode ? "#0073DD" : "#143F99"}
@@ -85,13 +101,12 @@ export const DetailScreen = () => {
           }}
         />
         <View style={styles.dateTextContainer}>
-          <Text color={colors.text}>{item}</Text>
+          <Text color={colors.text}>{moment(item.ts).format("MMM D")}</Text>
         </View>
       </TouchableOpacity>
     ),
     [
-      selectedDate,
-      mockData.sleepData.intervals,
+      selectedInterval,
       isDarkMode,
       colors.text,
       styles.dateContainer,
@@ -99,6 +114,9 @@ export const DetailScreen = () => {
       onDatePress,
     ],
   );
+
+  const ItemSeparatorComponent = () => <View style={styles.separator} />;
+  const ChartSeperator = () => <View style={styles.chartSeparator} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -108,24 +126,67 @@ export const DetailScreen = () => {
         <FlatList
           style={styles.flatlist}
           contentContainerStyle={styles.flatlistContentContainer}
-          data={dates}
+          data={orderedIntervals}
           horizontal
-          ItemSeparatorComponent={() => <View style={{ width: 24 }} />}
+          ItemSeparatorComponent={ItemSeparatorComponent}
           showsHorizontalScrollIndicator={false}
           renderItem={renderItem}
         />
+        <View style={styles.cardsContainer}>
+          <InfoCard
+            style={styles.infoCard}
+            title="Time to fall asleep"
+            value={calculateTimeToSleep(selectedInterval.stages)}
+            average={calculateAverageTimeToSleep(orderedIntervals)}
+          />
+          <InfoCard
+            style={styles.infoCard}
+            title="Sleep score"
+            value={`${selectedInterval.score.toString()}%`}
+            average={`${calculateAverageSleepScore(orderedIntervals).toString()}%`}
+          />
+        </View>
+        <View style={styles.cardsContainer}>
+          <InfoCard
+            style={styles.infoCard}
+            title="Heart rate"
+            value={calculateHeartRate(selectedInterval).toString()}
+            average={calculateAverageHeartRate(orderedIntervals).toString()}
+          />
+          <InfoCard
+            style={styles.infoCard}
+            title="Respiratory rate"
+            value={calculateRespiratoryRate(selectedInterval).toString()}
+            average={calculateAverageRespiratoryRate(
+              orderedIntervals,
+            ).toString()}
+          />
+        </View>
 
-        <TemperatureChart
-          interval={mockData.sleepData.intervals.find(
-            (interval) => moment(interval.ts).format("MMM D") === selectedDate,
-          )}
-        />
+        <View style={styles.cardsContainer}>
+          <InfoCard
+            style={styles.infoCard}
+            title="Toss and turns"
+            value={calculateTossAndTurns(selectedInterval).toString()}
+            average={calculateAverageTossAndTurns(orderedIntervals).toString()}
+          />
+          <InfoCard
+            style={styles.infoCard}
+            title="Bed temperature"
+            value={calculateBedTemperature(selectedInterval).toString()}
+            average={calculateAverageBedTemperature(
+              orderedIntervals,
+            ).toString()}
+          />
+        </View>
 
-        <SleepStagesChart
-          interval={mockData.sleepData.intervals.find(
-            (interval) => moment(interval.ts).format("MMM D") === selectedDate,
-          )}
-        />
+        <TemperatureChart interval={selectedInterval} />
+        <ChartSeperator />
+        <SleepStagesChart interval={selectedInterval} />
+        <ChartSeperator />
+        <HeartRateChart interval={selectedInterval} />
+        <ChartSeperator />
+        <RespiratoryRateChart interval={selectedInterval} />
       </ScrollView>
     </SafeAreaView>
   );

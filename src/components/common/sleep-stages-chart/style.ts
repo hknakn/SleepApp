@@ -15,7 +15,7 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       paddingHorizontal: 16,
-      marginTop: 32,
+      marginVertical: 32,
     },
     legendContainer: {
       flexDirection: "row",

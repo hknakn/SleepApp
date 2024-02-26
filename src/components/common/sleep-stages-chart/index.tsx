@@ -35,7 +35,7 @@ export const SleepStagesChart = ({ interval }: SleepStagesChartProps) => {
 
   return (
     <View style={styles.container}>
-      <Text h4 bold color={colors.text}>
+      <Text h3 bold color={colors.text}>
         Sleep Stages
       </Text>
 
@@ -64,7 +64,6 @@ export const SleepStagesChart = ({ interval }: SleepStagesChartProps) => {
                 points={points.stage}
                 y0={chartBounds.bottom}
                 color={hexToRGBA(colors.blue, 0.25)}
-                animate={{ type: "timing", duration: 300 }}
                 curveType="step"
               />
             </>

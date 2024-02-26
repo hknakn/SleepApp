@@ -9,80 +9,56 @@ import moment from "moment";
 import { SleepSession } from "@screens/home/mock/type";
 import { Text } from "elements";
 
-type TemperatureChartProps = {
+type HeartRateChartProps = {
   interval: SleepSession;
 };
 
-export const TemperatureChart = ({ interval }: TemperatureChartProps) => {
+export const HeartRateChart = ({ interval }: HeartRateChartProps) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const font = useFont(MontserratRegular, 12);
 
-  // Creating data for the chart with tempBedC and tempRoomC together
-  const data = interval.timeseries.tempBedC.map(([x, y]) => {
+  // Creating data for the chart for heart rate
+  const data = interval.timeseries.heartRate.map(([x, y]) => {
     return {
       time: moment.utc(x, "YYYY-MM-DDTHH:mm:ss Z").format("Ha"),
-      tempBedC: y,
-      timeRoomC: interval.timeseries.tempRoomC.find(
-        ([time]) => time === x,
-      )?.[1],
+      heartRate: y,
     };
   });
 
   return (
     <View style={styles.container}>
-      <Text h3 bold color={colors.text}>
-        Bed and Room Temperature
+      <Text h3 bold color={colors.text} style={styles.title}>
+        Heart Rate
       </Text>
-
-      <View style={styles.legendContainer}>
-        <View style={styles.redDot} />
-        <Text style={styles.legendText}>Bed</Text>
-
-        <View style={styles.blueDot} />
-        <Text style={styles.legendText}>Room</Text>
-      </View>
 
       <View style={styles.chartContainer}>
         <CartesianChart
           data={data}
           xKey="time"
-          yKeys={["tempBedC", "timeRoomC"]}
+          yKeys={["heartRate"]}
           axisOptions={{
             font,
             labelColor: colors.text,
             lineColor: colors.text,
           }}
-          domain={{ y: [0, 50] }}
+          domain={{ y: [40, 100] }}
         >
           {({ points }) => (
             <>
               <Line
-                points={points.tempBedC}
+                points={points.heartRate}
                 color={colors.red}
                 strokeWidth={2}
                 curveType="natural"
               />
-              <Line
-                points={points.timeRoomC}
-                color={colors.blue}
-                strokeWidth={2}
-                curveType="natural"
-              />
               <Scatter
-                points={points.tempBedC}
+                points={points.heartRate}
                 shape="circle"
                 radius={4}
                 style="fill"
                 color={colors.red}
-              />
-              <Scatter
-                points={points.timeRoomC}
-                shape="circle"
-                radius={4}
-                style="fill"
-                color={colors.blue}
               />
             </>
           )}

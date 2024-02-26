@@ -9,6 +9,10 @@ type Style = {
   dateTextContainer: ViewStyle;
   flatlistContentContainer: ViewStyle;
   scrollviewContentContainer: ViewStyle;
+  separator: ViewStyle;
+  cardsContainer: ViewStyle;
+  infoCard: ViewStyle;
+  chartSeparator: ViewStyle;
 };
 
 export default (theme: ExtendedTheme) => {
@@ -28,12 +32,12 @@ export default (theme: ExtendedTheme) => {
       borderBottomWidth: 2,
     },
     flatlist: {
-      paddingHorizontal: 16,
       marginVertical: 16,
       flexGrow: 0,
     },
     flatlistContentContainer: {
       height: 100,
+      paddingHorizontal: 16,
     },
     dateContainer: {
       alignItems: "center",
@@ -44,6 +48,23 @@ export default (theme: ExtendedTheme) => {
     },
     scrollviewContentContainer: {
       paddingBottom: 32,
+    },
+    separator: {
+      width: 24,
+    },
+    cardsContainer: {
+      paddingHorizontal: 16,
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    infoCard: {
+      marginBottom: 16,
+      width: "48%",
+    },
+    chartSeparator: {
+      marginHorizontal: 16,
+      backgroundColor: colors.foreground,
+      height: 1,
     },
   });
 };
