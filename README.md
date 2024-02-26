@@ -42,3 +42,9 @@ https://github.com/hknakn/SleepApp/assets/23198534/11941d6f-3723-41a4-b595-a064b
 2. Install the dependencies `npm install`
 3. Install the pods `npx pod install`
 4. Run the app `npx react-native run-ios`
+
+### Testing
+
+1. Follow the installation steps for detox [here](https://wix.github.io/Detox/docs/introduction/environment-setup).
+2. Run `detox build --configuration ios.sim.release` command to build tests.
+3. Run `detox test --configuration ios.sim.release` command to run the tests.
