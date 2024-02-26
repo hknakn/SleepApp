@@ -17,22 +17,23 @@ import { Header } from "./header";
 import { DaySleepScore } from "./day-sleep-score";
 import { InfoCards } from "./info-cards";
 import { Text } from "elements";
+import { translations } from "shared/localization";
 
 const CHARTS = [
   {
-    title: "Temperature",
+    title: translations.temperature,
     component: TemperatureChart,
   },
   {
-    title: "Sleep Stages",
+    title: translations.sleepStages,
     component: SleepStagesChart,
   },
   {
-    title: "Heart Rate",
+    title: translations.heartRate,
     component: HeartRateChart,
   },
   {
-    title: "Respiratory Rate",
+    title: translations.respiratoryRate,
     component: RespiratoryRateChart,
   },
 ];

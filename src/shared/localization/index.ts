@@ -12,6 +12,8 @@ export const translations = new LocalizedStrings({
     bedTemperature: "Yatak sıcaklığı",
     bed: "Yatak",
     room: "Oda",
+    temperature: "Sıcaklık",
+    sleepStages: "Uyku aşamaları",
   },
   en: {
     average: "Average: ",
@@ -24,5 +26,7 @@ export const translations = new LocalizedStrings({
     bedTemperature: "Bed temperature",
     bed: "Bed",
     room: "Room",
+    temperature: "Temperature",
+    sleepStages: "Sleep Stages",
   },
 });
