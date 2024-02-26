@@ -2,7 +2,7 @@
 
 ### Preview
 
-![](preview.mp4)
+![](https://github.com/hknakn/SleepApp/blob/master/preview.mp4)
 
 ### Tech Stack
 
