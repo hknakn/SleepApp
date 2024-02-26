@@ -3,6 +3,11 @@ export type SleepStage = {
   duration: number;
 };
 
+export type UserData = {
+  fullName: string;
+  sleepData: SleepData;
+};
+
 type TimeSeriesData = {
   tnt: Array<[string, number]>;
   tempRoomC: Array<[string, number]>;

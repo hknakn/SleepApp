@@ -1,4 +1,4 @@
-import { SleepSession, SleepStage } from "@screens/home/mock/type";
+import { SleepSession, SleepStage } from "data/type";
 import { removeLeadingZeros, secondsToHms } from "./conversions";
 
 export const calculateBedTemperature = (interval: SleepSession): number => {

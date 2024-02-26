@@ -1,9 +1,4 @@
-import SleepData from "./type";
-
-export type UserData = {
-  fullName: string;
-  sleepData: SleepData;
-};
+import { UserData } from "./type";
 
 export const MockData: UserData[] = [
   {

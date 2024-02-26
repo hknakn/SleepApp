@@ -5,7 +5,7 @@ import * as NavigationService from "react-navigation-helpers";
 import createStyles from "./style";
 import { useTheme } from "@react-navigation/native";
 import { SCREENS } from "@shared-constants";
-import { MockData, UserData } from "./mock/MockData";
+import { MockData, UserData } from "../../data";
 import { PersonCard } from "./person-card";
 import { Header } from "./header";
 

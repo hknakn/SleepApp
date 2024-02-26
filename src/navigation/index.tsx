@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { HomeScreen, DetailScreen } from "@screens/index";
 import { SCREENS } from "@shared-constants";
 import { DarkTheme, LightTheme } from "@theme/themes";
+import { translations } from "shared/localization";
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,9 @@ const Navigation = () => {
   const isDarkMode = scheme === "dark";
 
   useEffect(() => {
+    // Set the default language to English
+    translations.setLanguage("en");
+
     return () => {
       isReadyRef.current = false;
     };

@@ -1,27 +1,28 @@
 import LocalizedStrings from "react-native-localization";
 
 export const translations = new LocalizedStrings({
-  "tr-TR": {
-    noLocationService: "Lokasyon Servisi Kapalı",
-    logout: "Çıkış",
-    yes: "Evet",
-    no: "Hayır",
-    cancel: "İptal",
-    areYouSure: "Emin misiniz?",
-    logoutDesc: "Çıkış yapmak üzeresiniz onaylıyor musunuz?",
-    noInternet: "İnternet Bağlantısı Yok",
+  tr: {
+    average: "Ortalama: ",
+    latest: "En son: ",
+    timeToFallAsleep: "Uykuya dalma süresi",
+    sleepScore: "Uyku puanı",
+    heartRate: "Kalp atış hızı",
+    respiratoryRate: "Solunum hızı",
+    tossAndTurns: "Dönme ve carpma",
+    bedTemperature: "Yatak sıcaklığı",
+    bed: "Yatak",
+    room: "Oda",
   },
   en: {
-    noLocationService: "Location Service Not Available",
-    logout: "Logout",
-    yes: "Yes",
-    no: "No",
-    cancel: "Cancel",
-    areYouSure: "Are you sure?",
-    logoutDesc: "You are about to log out, confirm?",
-    noInternet: "No Internet Connection",
+    average: "Average: ",
+    latest: "Latest: ",
+    timeToFallAsleep: "Time to fall asleep",
+    sleepScore: "Sleep score",
+    heartRate: "Heart rate",
+    respiratoryRate: "Respiratory rate",
+    tossAndTurns: "Toss and turns",
+    bedTemperature: "Bed temperature",
+    bed: "Bed",
+    room: "Room",
   },
 });
-
-// ? Set the language manually
-// translations.setLanguage("tr");

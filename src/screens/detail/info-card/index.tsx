@@ -3,6 +3,7 @@ import { View, ViewStyle } from "react-native";
 import createStyles from "./style";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "elements";
+import { translations } from "shared/localization";
 
 type InfoCardProps = {
   style?: ViewStyle;
@@ -27,7 +28,7 @@ const InfoCard = ({ title, value, average, style }: InfoCardProps) => {
       {average && (
         <Text h5 color={colors.text}>
           <Text h5 color={colors.text} bold>
-            {"Average: "}
+            {translations.average}
           </Text>
           {average}
         </Text>

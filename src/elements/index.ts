@@ -1,1 +1,1 @@
-export { TextWrapper as Text } from "./Text";
+export { TextWrapper as Text } from "./text";

@@ -3,13 +3,14 @@ import { TouchableOpacity, View } from "react-native";
 import createStyles from "./style";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "elements";
-import { UserData } from "@screens/home/mock/MockData";
+import { UserData } from "data";
 import CircularProgress from "react-native-circular-progress-indicator";
 import {
   calculateAverageSleepScore,
   calculateAverageSleepTime,
   getLatestSleepDuration,
 } from "utils";
+import { translations } from "shared/localization";
 
 type PersonCardProps = {
   data: UserData;
@@ -39,7 +40,7 @@ export const PersonCard = ({ data, onPress }: PersonCardProps) => {
 
         <Text style={styles.descriptionBold} color={colors.text}>
           <Text bold style={styles.description} color={colors.text}>
-            {"Average: "}
+            {translations.average}
           </Text>
           <Text color={colors.text}>
             {calculateAverageSleepTime(intervals)}
@@ -48,7 +49,7 @@ export const PersonCard = ({ data, onPress }: PersonCardProps) => {
 
         <Text style={styles.descriptionBold} color={colors.text}>
           <Text bold style={styles.description} color={colors.text}>
-            {"Latest: "}
+            {translations.latest}
           </Text>
           <Text color={colors.text}>{getLatestSleepDuration(intervals)}</Text>
         </Text>

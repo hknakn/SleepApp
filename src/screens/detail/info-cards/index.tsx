@@ -14,8 +14,9 @@ import {
   calculateTossAndTurns,
 } from "utils";
 import createStyles from "./style";
-import { SleepSession } from "@screens/home/mock/type";
+import { SleepSession } from "data/type";
 import { InfoCard } from "../info-card";
+import { translations } from "shared/localization";
 
 type InfoCardsProps = {
   orderedIntervals: SleepSession[];
@@ -28,32 +29,32 @@ const InfoCards = ({ selectedInterval, orderedIntervals }: InfoCardsProps) => {
   // Creating data to render the info cards
   const data = [
     {
-      title: "Time to fall asleep",
+      title: translations.timeToFallAsleep,
       value: calculateTimeToSleep(selectedInterval.stages),
       average: calculateAverageTimeToSleep(orderedIntervals),
     },
     {
-      title: "Sleep score",
+      title: translations.sleepScore,
       value: `${selectedInterval.score.toString()}%`,
       average: `${calculateAverageSleepScore(orderedIntervals).toString()}%`,
     },
     {
-      title: "Heart rate",
+      title: translations.heartRate,
       value: calculateHeartRate(selectedInterval).toString(),
       average: calculateAverageHeartRate(orderedIntervals).toString(),
     },
     {
-      title: "Respiratory rate",
+      title: translations.respiratoryRate,
       value: calculateRespiratoryRate(selectedInterval).toString(),
       average: calculateAverageRespiratoryRate(orderedIntervals).toString(),
     },
     {
-      title: "Toss and turns",
+      title: translations.tossAndTurns,
       value: calculateTossAndTurns(selectedInterval).toString(),
       average: calculateAverageTossAndTurns(orderedIntervals).toString(),
     },
     {
-      title: "Bed temperature",
+      title: translations.bedTemperature,
       value: calculateBedTemperature(selectedInterval).toString(),
       average: calculateAverageBedTemperature(orderedIntervals).toString(),
     },

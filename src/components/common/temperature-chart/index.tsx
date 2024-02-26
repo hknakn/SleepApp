@@ -6,8 +6,9 @@ import { CartesianChart, Line, Scatter } from "victory-native";
 import { useFont } from "@shopify/react-native-skia";
 import MontserratRegular from "../../../assets/fonts/Montserrat/Montserrat-Regular.ttf";
 import moment from "moment";
-import { SleepSession } from "@screens/home/mock/type";
+import { SleepSession } from "data/type";
 import { Text } from "elements";
+import { translations } from "shared/localization";
 
 type TemperatureChartProps = {
   interval: SleepSession;
@@ -34,9 +35,9 @@ export const TemperatureChart = ({ interval }: TemperatureChartProps) => {
     <View style={styles.container}>
       <View style={styles.legendContainer}>
         <View style={styles.redDot} />
-        <Text style={styles.legendText}>Bed</Text>
+        <Text style={styles.legendText}>{translations.bed}</Text>
         <View style={styles.blueDot} />
-        <Text style={styles.legendText}>Room</Text>
+        <Text style={styles.legendText}>{translations.room}</Text>
       </View>
 
       <View style={styles.chartContainer}>

@@ -6,7 +6,7 @@ import { Area, CartesianChart, Line } from "victory-native";
 import { useFont } from "@shopify/react-native-skia";
 import MontserratRegular from "../../../assets/fonts/Montserrat/Montserrat-Regular.ttf";
 import moment from "moment";
-import { SleepSession } from "@screens/home/mock/type";
+import { SleepSession } from "data/type";
 import { hexToRGBA, numberToSleepStage, sleepStageToNumber } from "utils";
 import { SleepStagesChartData } from "./type";
 

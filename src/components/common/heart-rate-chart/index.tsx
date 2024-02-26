@@ -6,7 +6,7 @@ import { CartesianChart, Line, Scatter } from "victory-native";
 import { useFont } from "@shopify/react-native-skia";
 import MontserratRegular from "../../../assets/fonts/Montserrat/Montserrat-Regular.ttf";
 import moment from "moment";
-import { SleepSession } from "@screens/home/mock/type";
+import { SleepSession } from "data/type";
 
 type HeartRateChartProps = {
   interval: SleepSession;

@@ -6,7 +6,6 @@ type Style = {
   flatlist: ViewStyle;
   flatlistContentContainer: ViewStyle;
   scrollviewContentContainer: ViewStyle;
-  daySleepSeparator: ViewStyle;
   chartSeparator: ViewStyle;
   chartTitleContainer: ViewStyle;
 };
@@ -27,9 +26,6 @@ export default (theme: ExtendedTheme) => {
     },
     scrollviewContentContainer: {
       paddingBottom: 32,
-    },
-    daySleepSeparator: {
-      width: 24,
     },
     chartSeparator: {
       marginHorizontal: 16,

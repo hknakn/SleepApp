@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 import createStyles from "./style";
 import { useRoute, useTheme } from "@react-navigation/native";
-import { UserData } from "@screens/home/mock/MockData";
+import { UserData } from "data";
 import moment from "moment";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
@@ -12,7 +12,7 @@ import {
   SleepStagesChart,
   TemperatureChart,
 } from "components";
-import { SleepSession } from "@screens/home/mock/type";
+import { SleepSession } from "data/type";
 import { Header } from "./header";
 import { DaySleepScore } from "./day-sleep-score";
 import { InfoCards } from "./info-cards";
@@ -53,14 +53,18 @@ export const DetailScreen = () => {
   }, []);
 
   const renderDaySleepScore = useCallback(
-    ({ item }: { item: SleepSession }) => (
+    ({ item, index }: { item: SleepSession; index: number }) => (
       <DaySleepScore
+        style={{
+          marginLeft: index === 0 ? 0 : 12,
+          marginRight: index === orderedIntervals.length - 1 ? 0 : 12,
+        }}
         item={item}
         isSelected={selectedInterval === item}
         onDatePress={onDatePress}
       />
     ),
-    [onDatePress, selectedInterval],
+    [onDatePress, selectedInterval, orderedIntervals.length],
   );
 
   const renderCharts = useCallback(
@@ -77,11 +81,7 @@ export const DetailScreen = () => {
     [selectedInterval, colors.text, styles.chartTitleContainer],
   );
 
-  const DaySleepScoreSeparator = () => (
-    <View style={styles.daySleepSeparator} />
-  );
-
-  const ChartSeparator = () => <View style={styles.chartSeparator} />;
+  const Separator = () => <View style={styles.chartSeparator} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,7 +94,6 @@ export const DetailScreen = () => {
           contentContainerStyle={styles.flatlistContentContainer}
           data={orderedIntervals}
           horizontal
-          ItemSeparatorComponent={DaySleepScoreSeparator}
           showsHorizontalScrollIndicator={false}
           renderItem={renderDaySleepScore}
         />
@@ -110,7 +109,7 @@ export const DetailScreen = () => {
           data={CHARTS}
           renderItem={renderCharts}
           keyExtractor={(item) => item.title}
-          ItemSeparatorComponent={ChartSeparator}
+          ItemSeparatorComponent={Separator}
         />
       </ScrollView>
     </SafeAreaView>
