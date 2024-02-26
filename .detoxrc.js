@@ -12,16 +12,17 @@ module.exports = {
   apps: {
     "ios.debug": {
       type: "ios.app",
-      binaryPath: "ios/build/Build/Products/Debug-iphonesimulator/YOUR_APP.app",
+      binaryPath:
+        "ios/build/Build/Products/Debug-iphonesimulator/rntypescriptBoilerplate.app",
       build:
-        "xcodebuild -workspace ios/YOUR_APP.xcworkspace -scheme YOUR_APP -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "xcodebuild -workspace ios/rntypescriptBoilerplate.xcworkspace -scheme rntypescriptBoilerplate -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
     },
     "ios.release": {
       type: "ios.app",
       binaryPath:
-        "ios/build/Build/Products/Release-iphonesimulator/YOUR_APP.app",
+        "ios/build/Build/Products/Release-iphonesimulator/rntypescriptBoilerplate.app",
       build:
-        "xcodebuild -workspace ios/YOUR_APP.xcworkspace -scheme YOUR_APP -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
+        "xcodebuild -workspace ios/rntypescriptBoilerplate.xcworkspace -scheme rntypescriptBoilerplate -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
     },
     "android.debug": {
       type: "android.apk",
@@ -41,7 +42,7 @@ module.exports = {
     simulator: {
       type: "ios.simulator",
       device: {
-        type: "iPhone 15",
+        type: "iPhone 15 Pro Max",
       },
     },
     attached: {

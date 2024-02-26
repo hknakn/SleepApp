@@ -18,8 +18,12 @@ export const HomeScreen = () => {
   }, []);
 
   const renderItem = useCallback(
-    ({ item }: { item: UserData }) => (
-      <PersonCard data={item} onPress={() => handleItemPress(item)} />
+    ({ item, index }: { item: UserData; index: number }) => (
+      <PersonCard
+        testID={`person-card-${index}`}
+        data={item}
+        onPress={() => handleItemPress(item)}
+      />
     ),
     [handleItemPress],
   );

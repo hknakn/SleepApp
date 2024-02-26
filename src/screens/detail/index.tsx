@@ -88,7 +88,10 @@ export const DetailScreen = () => {
     <SafeAreaView style={styles.container}>
       <Header fullName={mockData.fullName} />
 
-      <ScrollView contentContainerStyle={styles.scrollviewContentContainer}>
+      <ScrollView
+        contentContainerStyle={styles.scrollviewContentContainer}
+        testID="detailSrollView"
+      >
         {/* Rendering Day Sleep Scores */}
         <FlatList
           style={styles.flatlist}

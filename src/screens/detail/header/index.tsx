@@ -22,7 +22,7 @@ const Header = ({ fullName }: HeaderProps) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity hitSlop={10} onPress={onBackPress}>
+      <TouchableOpacity hitSlop={10} onPress={onBackPress} testID="backButton">
         <Icon
           name="chevron-back-outline"
           type={IconType.Ionicons}

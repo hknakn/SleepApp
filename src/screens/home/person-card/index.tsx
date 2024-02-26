@@ -13,11 +13,12 @@ import {
 import { translations } from "shared/localization";
 
 type PersonCardProps = {
+  testID?: string;
   data: UserData;
   onPress: () => void;
 };
 
-export const PersonCard = ({ data, onPress }: PersonCardProps) => {
+export const PersonCard = ({ data, onPress, testID }: PersonCardProps) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -32,7 +33,11 @@ export const PersonCard = ({ data, onPress }: PersonCardProps) => {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      testID={testID}
+    >
       <View style={styles.contentContainer}>
         <Text style={styles.title} bold color={colors.blue}>
           {fullName}
